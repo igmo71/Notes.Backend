@@ -37,6 +37,7 @@ public class NotesController : BaseController
     public async Task<ActionResult<Guid>> Create([FromBody] CreateNoteDto createNoteDto)
     {
         var command = _mapper.Map<CreateNoteCommand>(createNoteDto);
+        command.UserId = UserId;
         var result = await Mediator.Send(command);
         return Ok(result);
     }
@@ -45,6 +46,7 @@ public class NotesController : BaseController
     public async Task<ActionResult> Update([FromBody] UpdateNoteDto updateNoteDto)
     {
         var command = _mapper.Map<UpdateNoteCommand>(updateNoteDto);
+        command.UserId = UserId;
         await Mediator.Send(command);
         return NoContent();
     }
