@@ -13,6 +13,7 @@ public static class DependencyInjection
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssemblies(new[] { Assembly.GetExecutingAssembly() });
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-        return services;
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+            return services;
     }
 }
